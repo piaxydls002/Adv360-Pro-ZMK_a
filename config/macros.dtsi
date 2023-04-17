@@ -34,3 +34,119 @@
     #binding-cells = <0>;
     bindings = <&kp LS(K)>, <&kp I>, <&kp N>, <&kp E>, <&kp S>, <&kp I>, <&kp S>;
   };
+
+
+
+macros {
+    lparm: lparm {
+        label = "l_par_m";
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings
+            = <&macro_release &kp LCTRL>
+            , <&macro_tap &kp LBKT>
+            ;
+    };
+    rparm: rparm {
+        label = "r_par_m";
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings
+            = <&macro_release &kp LCTRL>
+            , <&macro_tap &kp RBKT>
+            ;
+    };
+};
+
+//# more combos
+//CONFIG_ZMK_COMBO_MAX_COMBOS_PER_KEY=12
+
+combos {
+        compatible = "zmk,combos";
+    combo_q {
+        timeout-ms = <50>;
+        key-positions = <69 23>;
+        bindings = <&kp LBRC>;
+    };
+    combo_w {
+        timeout-ms = <50>;
+        key-positions = <69 24>;
+        bindings = <&kp RBRC>;
+    };
+    combo_a {
+        timeout-ms = <50>;
+        key-positions = <69 35>;
+        bindings = <&kp LPAR>;
+    };
+    combo_r {
+        timeout-ms = <50>;
+        key-positions = <69 36>;
+        bindings = <&kp RPAR>;
+    };
+    combo_z {
+        timeout-ms = <50>;
+        key-positions = <69 47>;
+        bindings = <&kp LBKT>;
+    };
+    combo_x {
+        timeout-ms = <50>;
+        key-positions = <69 48>;
+        bindings = <&kp RBKT>;
+    };
+    combo_f {
+        timeout-ms = <50>;
+        key-positions = <69 25>;
+        bindings = <&kp PLUS>;
+    };
+    combo_p {
+        timeout-ms = <50>;
+        key-positions = <69 26>;
+        bindings = <&kp EQUAL>;
+    };
+    combo_s {
+        timeout-ms = <50>;
+        key-positions = <69 37>;
+        bindings = <&kp MINUS>;
+    };
+    combo_t {
+        timeout-ms = <50>;
+        key-positions = <69 38>;
+        bindings = <&kp UNDER>;
+    };
+    combo_c {
+        timeout-ms = <50>;
+        key-positions = <69 49>;
+        bindings = <&kp GRAVE>;
+    };
+    combo_d {
+        timeout-ms = <50>;
+        key-positions = <69 50>;
+        bindings = <&kp TILDE>;
+    };
+};
+
+behaviors {
+    mm_lpar: mod_morphed_lpar {
+        compatible = "zmk,behavior-mod-morph";
+        label = "MOD_MORPHED_LPAR";
+        #binding-cells = <0>;
+        bindings = <&kp LPAR>, <&lparm>;
+        mods = <(MOD_LSFT|MOD_RSFT|MOD_LCTL)>;
+    };
+    mm_rpar: mod_morphed_rpar {
+        compatible = "zmk,behavior-mod-morph";
+        label = "MOD_MORPHED_RPAR";
+        #binding-cells = <0>;
+        bindings = <&kp RPAR>, <&rparm>;
+        mods = <(MOD_LSFT|MOD_RSFT|MOD_LCTL)>;
+    };
+    bhm: balanced_homerow_mods {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOMEROW_MODS";
+        #binding-cells = <2>;
+        tapping-term-ms = <200>;    // <---[[moderate duration]]
+        quick-tap-ms = <0>;
+        flavor = "balanced";
+        bindings = <&kp>, <&kp>;
+    };
+};
